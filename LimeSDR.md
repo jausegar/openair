@@ -7,14 +7,16 @@ Follow the instruction provided [here] (https://gitlab.eurecom.fr/oai/openairint
 Install the required Ubuntu packages for Lime
 Note: the following steps will be shortly integrated with build_oai script
 
-Install from packages
+# Install from packages
 
 The drivers PPA for Ubuntu has a recent build of LimeSuite:
 
     sudo add-apt-repository -y ppa:myriadrf/drivers
     sudo apt-get update
-    sudo apt-get install limesuite liblimesuite liblimesuite-dev limesuite-udev limesuite-images
+    sudo apt-get install limesuite liblimesuite-dev limesuite-udev limesuite-images
     sudo apt-get install soapysdr soapysdr-module-lms7
+    sudo apt-get install soapysdr-module-audio soapysdr-module-uhd uhd-soapysdr soapysdr-module-rtlsdr
+    sudo apt install gr-gsm gqrx-sdr
 
 For more information, have a look at Lime Suite, git clone https://github.com/myriadrf/LimeSuite, and read the following file: LimeSuite/docs/lms7suite_compilation_guide.pdf
 
@@ -51,3 +53,61 @@ The instructions are provided [here
     sudo ./install.sh
     # Download board firmware
     sudo LimeUtil --update
+
+# Find devices and testing
+
+Sometimes when it's plugged in, LimeUtil --find reports
+
+    $ LimeUtil --find
+        * [LimeSDR Mini, media=USB 3.0, module=FT601, addr=24607:1027, serial=1D3AEC399FFA28]
+
+but sometimes it reports
+
+    $ LimeUtil --find
+        * [LimeSDR Mini, media=USB 2.0, module=FT601, addr=24607:1027, serial=1D3AEC399FFA28]
+
+And I have no idea why it might switch because each port I'm plugging it into should be USB 3.0 capable.
+
+Run uhd_find_devices to make sure that your LimeSDR is found by the uhd-soapy interface:
+
+    $ uhd_find_devices 
+    [INFO] [UHD] linux; GNU C++ version 8.3.0; Boost_106700; UHD_3.13.1.0-3build1
+    --------------------------------------------------
+    -- UHD Device 0
+    --------------------------------------------------
+    Device Address:
+        serial: 
+        default_input: False
+        default_input: True
+        default_output: False
+        default_output: True
+        device_id: 0
+        device_id: 6
+        driver: audio
+        label: default
+        label: hw:HDA Intel PCH,0
+        type: soapy
+
+    --------------------------------------------------
+    -- UHD Device 1
+    --------------------------------------------------
+    Device Address:
+        serial: 1D3AEC399FFA28
+        addr: 24607:1027
+        driver: lime
+        label: LimeSDR Mini [USB 3.0] 1D3AEC399FFA28
+        media: USB 3.0
+        module: FT601
+        name: LimeSDR Mini
+        type: soapy
+
+Make sure your LimeSDR has the latest firmware:
+
+    $ LimeUtil --find
+        * [LimeSDR Mini, media=USB 3.0, module=FT601, addr=24607:1027, serial=1D3AEC399FFA28]
+
+    $ LimeUtil --update
+        Connected to [LimeSDR Mini [USB 3.0] 1D3AEC399FFA28]
+        Existing gateware is same as update (1.30)
+
+        Programming update complete!
