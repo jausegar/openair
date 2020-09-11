@@ -34,6 +34,7 @@ SPGW-C (https://github.com/OPENAIRINTERFACE/openair-spgwc/tree/9c2e49fe60351b69a
 We can install first then go configure everything.
 
 <b>Install Cassandra Database for the HSS</b>
+
 There are issues with the current Cassandra script. First, add the public key:
 
     wget -q -O - https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
@@ -78,7 +79,7 @@ The SPGW-C is now in the openair-spgwu repository.
     ./build_spgwc -I -f
     ./build_spgwc -c -V -b Debug -j
 
-<b>Configure Everything</b>
+###Configure Everything
 
 To make changes easier, we can change the permisions on the folder where all the config files will be.
 
@@ -110,4 +111,5 @@ Update /etc/cassandra/cassandra.yaml. HERE is a version. The summary of the chan
 Restart Cassandra:
 
     sudo service cassandra start
+
 
