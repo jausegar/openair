@@ -154,7 +154,7 @@ Then, you can compile and run 5G tests
 
 To compile:
 
-    ./build_oai --gNB --nrUE
+    ./cmake_targets/build_oai -c -w LMSSDR --gNB --nrUE
 
 What you end up with after that build is:
 
