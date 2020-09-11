@@ -136,9 +136,34 @@ Above command had -c clean Erase all files to make a rebuild from start
 
 The open-cells limesdr-installation used
 
-    ./cmake_targets/build_oai -c -w LMSSDR --eNB --UE
+    ./cmake_targets/build_oai -c -w LMSSDR --eNB --UE --nrUE --gNB
 
 for -c clean, -w hardware, --eNB and also --UE Makes the UE specific parts (ue_ip, usim, nvram) from the given configuration file -- default given config file is /home/openair/openairinterface/openairinterface5g/openair3/NAS/TOOLS/ue_eurecom_test_sfr.conf
+
+The -I option is to install pre-requisites, you only need it the first time you build the softmodem or when some oai dependencies have changed.
+The -w option is to select the radio head support you want to include in your build. Radio head support is provided via a shared library, which is called the "oai device" The build script creates a soft link from liboai_device.so to the true device which will be used at run-time (here the USRP one,liboai_usrpdevif.so . USRP is the only hardware tested today in the Continuous Integration process. The RF simulatorRF simulator is implemented as a specific device replacing RF hardware, it can be specifically built using -w SIMU option, but is also built during any softmodem build.
+
+--eNB is to build the lte-softmodem executable and all required shared libraries
+
+--gNB is to build the nr-softmodem executable and all required shared libraries
+
+--UE is to build the lte-uesoftmodem executable and all required shared libraries
+
+--nrUE is to build the nr-uesoftmodem executable and all required shared libraries
+
+
+What you end up with after that build is:
+
+    targets/bin/liboai_device.so ->  targets/bin/liboai_lmssdrdevif.so.Rel14
+    targets/bin/liboai_lmssdrdevif.so.Rel14
+    targets/bin/lte-softmodem.Rel14
+
+and any custom LimeSDR tweaks like setting external clock reference or printing confirmation of antenna use go in
+
+    targets/ARCH/LMSSDR/USERSPACE/LIB/lms_lib.cpp
+
+plus it's just fun to read in itself with /usr/local/include/lime/LimeSuite.h open in another term. Of course rebuild lte-softmodem after any tweaks or experiments.
+
 
 In order to run 5G OpenAir, from current develop branch.
 
@@ -152,21 +177,6 @@ Please read the 4G tutorial for more information on how to make initial installa
 
 Then, you can compile and run 5G tests
 
-To compile:
-
-    ./cmake_targets/build_oai -c -w LMSSDR --gNB --nrUE
-
-What you end up with after that build is:
-
-    targets/bin/liboai_device.so ->  targets/bin/liboai_lmssdrdevif.so.Rel14
-    targets/bin/liboai_lmssdrdevif.so.Rel14
-    targets/bin/lte-softmodem.Rel14
-
-and any custom LimeSDR tweaks like setting external clock reference or printing confirmation of antenna use go in
-
-    targets/ARCH/LMSSDR/USERSPACE/LIB/lms_lib.cpp
-
-plus it's just fun to read in itself with /usr/local/include/lime/LimeSuite.h open in another term. Of course rebuild lte-softmodem after any tweaks or experiments.
 
 
 Configure Everything
