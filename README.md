@@ -139,6 +139,23 @@ The open-cells limesdr-installation used
     ./cmake_targets/build_oai -c -w LMSSDR --eNB --UE
 
 for -c clean, -w hardware, --eNB and also --UE Makes the UE specific parts (ue_ip, usim, nvram) from the given configuration file -- default given config file is /home/openair/openairinterface/openairinterface5g/openair3/NAS/TOOLS/ue_eurecom_test_sfr.conf
+
+In order to run 5G OpenAir, from current develop branch.
+
+OAI 5G is very partial, only a fixed scheduler, for one UE, no network entry (no radio network entry, no upper layers network entry).
+
+We can use “phy-test” mode, that hard code a permanent UL and DL shared channel (means a data channel dedicated to one UE in 3GPP jargon).
+
+Of course there is no core network in this very special “phy-test” mode and some upper layer pieces are still 4G (PDCP for example).
+
+Please read the 4G tutorial for more information on how to make initial installation of OpenAir.
+
+Then, you can compile and run 5G tests
+
+To compile:
+
+    ./build_oai --gNB --nrUE
+
 What you end up with after that build is:
 
     targets/bin/liboai_device.so ->  targets/bin/liboai_lmssdrdevif.so.Rel14
