@@ -31,11 +31,11 @@ SPGW-C (https://github.com/OPENAIRINTERFACE/openair-spgwc/tree/9c2e49fe60351b69a
     git branch
     git checkout -b 9c2e49fe60351b69a7da1a898e4bbc0fd39dcc41
 
-<b>Install Everything</b>
+# Install Everything
 
 We can install first then go configure everything.
 
-<b>Install Cassandra Database for the HSS</b>
+## Install Cassandra Database for the HSS
 
 There are issues with the current Cassandra script. First, add the public key:
 
@@ -53,17 +53,17 @@ Then install:
 
     ./build_cassandra --check-installed-software --force
 
-<b>Install HSS</b>
+## Install HSS
 
     ./build_hss_rel14 --check-installed-software --force
     ./build_hss_rel14 --clean
 
-<b>Install MME</b>
+## Install MME
 
     ./build_mme --check-installed-software --force
     ./build_mme --clean
 
-<b>Install SPGW-U</b>
+## Install SPGW-U
 
 The SPGW-U is now in the openair-spgwu-tiny repository.
 
@@ -73,7 +73,7 @@ There is a dependency issue for the “folly” package requirement. “fmt” w
     ./build_spgwu -I -f
     ./build_spgwu -c -V -b Debug -j
 
-<b>Install SPGW-C</b>
+## Install SPGW-C
 
 The SPGW-C is now in the openair-spgwu repository.
 
@@ -89,7 +89,7 @@ To make changes easier, we can change the permisions on the folder where all the
     sudo mkdir /usr/local/etc/oai
     sudo chmod 777 -R oai/
 
-# Configure Cassandra
+## Configure Cassandra
 
 If the ealier installation was good, you should be able to run the following command.
 
@@ -115,7 +115,7 @@ Restart Cassandra:
 
     sudo service cassandra start
 
-# Add in your SIM Info
+## Add in your SIM Info
 
 There are commands (./data_provisioning_users and ./data_provisioning_mme), to help with this. I am using SIM cards provided by opencells. They have a corenetwork sql file for the old hss that goes with their SIM cards. The commands below are for my SIM cards. Modify each as necessary.
 
@@ -124,17 +124,17 @@ There are commands (./data_provisioning_users and ./data_provisioning_mme), to h
     cqlsh --file ../src/hss_rel14/db/oai_db.cql $Cassandra_Server_IP
     ./openair-cn/scripts/data_provisioning_users --apn default --apn2 internet --key 6874736969202073796d4b2079650a73 --imsi-first 208920100001100 --msisdn-first 33638020000 --mme-identity mme.ng4T.com --no-of-users 20 --realm ng4T.com --truncate True --verbose True --cassandra-cluster $Cassandra_Server_IP
 
-# Add MME info to the database
+## Add MME info to the database
 
     ./openair-cn/scripts/data_provisioning_mme --id 3 --mme-identity mme.ng4T.com --realm ng4T.com --ue-reachability 1 --truncate True  --verbose True -C $Cassandra_Server_IP
 
-# Get Certificates:
+## Get Certificates:
 
     cd  # Put yourself in your home dir
     ./openair-cn/src/hss_rel14/bin/make_certs.sh hss ng4t.com /usr/local/etc/oai                      # For HSS
     sudo ./openair-cn/scripts/check_mme_s6a_certificate /usr/local/etc/oai/freeDiameter mme.ng4t.com  # For MME
 
-# Copy Files
+## Copy Files
 
 The configurations are found in openair-<block>/etc. Here, I have mine. The mme, hss_rel14, and spgw.conf files (I added a .txt after them so the broswer would display them without trying to download them) go in “/usr/local/etc/oai/.” The acl.conf and things that end in fd.conf go in “/usr/local/etc/oai/freeDiameter/.”
 
@@ -148,7 +148,7 @@ The configurations are found in openair-<block>/etc. Here, I have mine. The mme,
     cp ~/openair-hss/etc/hss_rel14_fd.conf  /usr/local/etc/oai/freeDiameter 
     cp ~/openair-hss/etc/mme_fd.conf        /usr/local/etc/oai/freeDiameter
 
-# Fill in the config files
+## Fill in the config files
 
 The official guide sets up everything via declaring variables and then performing sed commands. I prefer to do this manually. I think it is valuable to open each file, see all the paramters, and to fill them in according to your setup.
 Note on the interfaces.
