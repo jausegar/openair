@@ -1,5 +1,7 @@
 # OpenAir
-<b>OpenAirInterface</b>
+
+OpenAirInterface
+=================
 
 Download the repos separately (HSS, MME, SPGW-U and SPGW-C)
 
@@ -79,14 +81,15 @@ The SPGW-C is now in the openair-spgwu repository.
     ./build_spgwc -I -f
     ./build_spgwc -c -V -b Debug -j
 
-###Configure Everything
+Configure Everything
+======================
 
 To make changes easier, we can change the permisions on the folder where all the config files will be.
 
     sudo mkdir /usr/local/etc/oai
     sudo chmod 777 -R oai/
 
-<b>Configure Cassandra</b>
+# Configure Cassandra
 
 If the ealier installation was good, you should be able to run the following command.
 
@@ -112,4 +115,103 @@ Restart Cassandra:
 
     sudo service cassandra start
 
+# Add in your SIM Info
 
+There are commands (./data_provisioning_users and ./data_provisioning_mme), to help with this. I am using SIM cards provided by opencells. They have a corenetwork sql file for the old hss that goes with their SIM cards. The commands below are for my SIM cards. Modify each as necessary.
+
+    cd
+    Cassandra_Server_IP='127.0.0.1'
+    cqlsh --file ../src/hss_rel14/db/oai_db.cql $Cassandra_Server_IP
+    ./openair-cn/scripts/data_provisioning_users --apn default --apn2 internet --key 6874736969202073796d4b2079650a73 --imsi-first 208920100001100 --msisdn-first 33638020000 --mme-identity mme.ng4T.com --no-of-users 20 --realm ng4T.com --truncate True --verbose True --cassandra-cluster $Cassandra_Server_IP
+
+# Add MME info to the database
+
+    ./openair-cn/scripts/data_provisioning_mme --id 3 --mme-identity mme.ng4T.com --realm ng4T.com --ue-reachability 1 --truncate True  --verbose True -C $Cassandra_Server_IP
+
+# Get Certificates:
+
+    cd  # Put yourself in your home dir
+    ./openair-cn/src/hss_rel14/bin/make_certs.sh hss ng4t.com /usr/local/etc/oai                      # For HSS
+    sudo ./openair-cn/scripts/check_mme_s6a_certificate /usr/local/etc/oai/freeDiameter mme.ng4t.com  # For MME
+
+# Copy Files
+
+The configurations are found in openair-<block>/etc. Here, I have mine. The mme, hss_rel14, and spgw.conf files (I added a .txt after them so the broswer would display them without trying to download them) go in “/usr/local/etc/oai/.” The acl.conf and things that end in fd.conf go in “/usr/local/etc/oai/freeDiameter/.”
+
+    cp ~/openair-hss/etc/hss_rel14.conf     /usr/local/etc/oai
+    cp ~/openair-hss/etc/hss_rel14.json     /usr/local/etc/oai
+    cp ~/openair-mme/etc/mme.conf           /usr/local/etc/oai
+    cp ~/openair-spgwc/etc/spgw_c.conf      /usr/local/etc/oai
+    cp ~/openair-spgwu-tiny/etc/spgw_u.conf /usr/local/etc/oai
+
+    cp ~/openair-hss/etc/acl.conf           /usr/local/etc/oai/freeDiameter
+    cp ~/openair-hss/etc/hss_rel14_fd.conf  /usr/local/etc/oai/freeDiameter 
+    cp ~/openair-hss/etc/mme_fd.conf        /usr/local/etc/oai/freeDiameter
+
+# Fill in the config files
+
+The official guide sets up everything via declaring variables and then performing sed commands. I prefer to do this manually. I think it is valuable to open each file, see all the paramters, and to fill them in according to your setup.
+Note on the interfaces.
+
+Nearly everything is done on virtual interfaces. The mme sets up it’s virtual interfaces when we run the command to start the MME.
+
+The virtual interfaces for the SPGW are not set up automatically. These commands turn them on:
+
+# Set up interfaces for SPGW-U
+
+    sudo ifconfig ens3:sxu 172.55.55.102 up   # SPGW-U SXab interface
+    sudo ifconfig ens3:s1u 192.168.248.159 up # SPGW-U S1U interface
+
+# Set up interfaces for SPGW-C
+
+    sudo ifconfig ens3:sxc 172.55.55.101 up # SPGW-C SXab interface
+    sudo ifconfig ens3:s5c 172.58.58.102 up # SGW-C S5S8 interface
+    sudo ifconfig ens3:p5c 172.58.58.101 up # PGW-C S5S8 interface
+    sudo ifconfig ens3:s11 172.16.1.104 up  # SGW-C S11 interface
+
+Run Everything
+=============
+
+We’ll need four separate terminals. Start with the hss. It is better to do things in screens, so we don't need to ssh 3 separate times.
+
+    screen -S hss # Create a named screen session for the HSS.
+    cd ~/openair-hss/scripts
+    ./run_hss -j /usr/local/etc/oai/hss_rel14.json  # This is run inside the screen session
+
+The HSS will start, then you can exit the screen by hitting CTRL + A + D.
+
+Then the mme:
+
+    screen -S mme # Create a named screen session for the MME.
+    cd ~/openair-mme/scripts
+    ./run_mme --set-virt-if
+
+The MME will start, then you can exit the screen by hitting CTRL + A + D.
+
+And now the spgw:
+
+    screen -S spgw_c # Create a named screen session for the SPGW.
+    cd ~/openair-spgwc/build/scripts
+    sudo spgwc -c /usr/local/etc/oai/spgw_c.conf
+
+The SPGW_C will start, then you can exit the screen by hitting CTRL + A + D.
+
+    screen -S spgw_u # Create a named screen session for the SPGW.
+    cd ~/openair-spgwu-tiny/build/scripts
+    sudo spgwu -c /usr/local/etc/oai/spgw_u.conf
+
+The SPGW_U will start, then you can exit the screen by hitting CTRL + A + D.
+
+# Monitoring
+
+You can see all your screens with
+
+    screen -ls
+
+To attach to any and see the current console outputs,
+
+    screen -r hss # use hss, mme, spgw_u, or spgw_c
+
+# Teardown
+
+Once you are ready to quit, attach to each screen. Exit the application via CTRL + C Then kill the screen via CTRL + A then press K . Press y when it asks if you are serious about quitting.
