@@ -128,6 +128,28 @@ Next run
     liboai_device.so is linked to LMSSDR device library
     10. Bypassing the Tests ..
 
+More on build options:
+A fellow in the discourse how-to-install-limesdr-on-openinterface-enodeb uses: ./build_oai -I --eNB -x -w LMSSDR Add -x to enable xforms (soft scope), -w hardware EXMIMO, USRP, BLADERF, ETHERNET, LMSSDR, None (Default) --eNB Makes the LTE softmodem -I Installs required packages such as LibXML, asn1.1 compiler, freediameter, ... <-- I did this seperately above
+
+Above command had -c clean Erase all files to make a rebuild from start
+-C clean-all Erase all files made by previous compilations, installations
+
+The open-cells limesdr-installation used
+
+    ./cmake_targets/build_oai -c -w LMSSDR --eNB --UE
+
+for -c clean, -w hardware, --eNB and also --UE Makes the UE specific parts (ue_ip, usim, nvram) from the given configuration file -- default given config file is /home/openair/openairinterface/openairinterface5g/openair3/NAS/TOOLS/ue_eurecom_test_sfr.conf
+What you end up with after that build is:
+
+    targets/bin/liboai_device.so ->  targets/bin/liboai_lmssdrdevif.so.Rel14
+    targets/bin/liboai_lmssdrdevif.so.Rel14
+    targets/bin/lte-softmodem.Rel14
+
+and any custom LimeSDR tweaks like setting external clock reference or printing confirmation of antenna use go in
+
+    targets/ARCH/LMSSDR/USERSPACE/LIB/lms_lib.cpp
+
+plus it's just fun to read in itself with /usr/local/include/lime/LimeSuite.h open in another term. Of course rebuild lte-softmodem after any tweaks or experiments.
 
 
 Configure Everything
