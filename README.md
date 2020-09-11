@@ -78,7 +78,7 @@ The SPGW-C is now in the openair-spgwu repository.
     ./build_spgwc -I -f
     ./build_spgwc -c -V -b Debug -j
 
-<b>Configure Everything</b>
+#Configure Everything
 
 To make changes easier, we can change the permisions on the folder where all the config files will be.
 
