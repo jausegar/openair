@@ -3,9 +3,9 @@
 OpenAirInterface
 =================
 
-Download the repos separately (HSS, MME, SPGW-U and SPGW-C)
+Download the repos separately (HSS, MME, SPGW-U, SPGW-C and RAN)
 
-Clone the openair-hss, openair-mme, openair-spgwu-tiny and spgw-c repos (with specific commits):
+Clone the openair-hss, openair-mme, openair-spgwu-tiny, spgw-c and RAN repos (with specific commits):
 
 HSS (https://github.com/OPENAIRINTERFACE/openair-hss/commit/d1d0e45ec749fc49f749c65744084ee09ab1f3e5)
 
@@ -30,6 +30,12 @@ SPGW-C (https://github.com/OPENAIRINTERFACE/openair-spgwc/tree/9c2e49fe60351b69a
     git clone https://github.com/OPENAIRINTERFACE/openair-spgwc.git
     git branch
     git checkout -b 9c2e49fe60351b69a7da1a898e4bbc0fd39dcc41
+
+RAN (https://gitlab.eurecom.fr/oai/openairinterface5g/-/tree/7f28f8d10dc0d73fd4b10d4a89fde554158f9fb5)
+
+    git clone https://gitlab.eurecom.fr/oai/openairinterface5g.git
+    git branch
+    git checkout -b 7f28f8d10dc0d73fd4b10d4a89fde554158f9fb5
 
 # Install Everything
 
