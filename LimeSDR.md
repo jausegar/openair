@@ -20,7 +20,8 @@ For more information, have a look at Lime Suite, git clone https://github.com/my
 
 # Install from source
 
-The instructions are provided here by [open-cells] (https://open-cells.com), and are added here for completeness.
+The instructions are provided here[here
+](https://open-cells.com/index.php/2017/05/10/limesdr-installation/) by [open-cells](https://open-cells.com), and are added here for completeness.
 
 ## Install the required packages
 
