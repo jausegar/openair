@@ -1,4 +1,4 @@
-# openair
+# OpenAir
 <b>OpenAirInterface</b>
 
 Download the repos separately (HSS, MME, SPGW-U and SPGW-C)
@@ -77,4 +77,37 @@ The SPGW-C is now in the openair-spgwu repository.
     cd ~/openair-spgwc/build/scripts
     ./build_spgwc -I -f
     ./build_spgwc -c -V -b Debug -j
+
+<b>Configure Everything</b>
+
+To make changes easier, we can change the permisions on the folder where all the config files will be.
+
+    sudo mkdir /usr/local/etc/oai
+    sudo chmod 777 -R oai/
+
+<b>Configure Cassandra</b>
+
+If the ealier installation was good, you should be able to run the following command.
+
+    nodetool status
+
+Stop Cassandra and cleanup the log files before modifying the configuration. This is blatently stolen from the official guide.
+
+    sudo service cassandra stop
+    sudo rm -rf /var/lib/cassandra/data/system/*
+    sudo rm -rf /var/lib/cassandra/commitlog/*
+    sudo rm -rf /var/lib/cassandra/data/system_traces/*
+    sudo rm -rf /var/lib/cassandra/saved_caches/*
+
+Update /etc/cassandra/cassandra.yaml. HERE is a version. The summary of the changes is below:
+
+    Line 10: change cluster_name to ‘HSS Cluster’
+    Line 273: `seeds: “127.0.0.1”
+    Line 386: listen_address: localhost
+    Line 444: rpc_address: localhost
+    Line 705: endpoint_snitch: GossipingPropertyFileSnitch
+
+Restart Cassandra:
+
+    sudo service cassandra start
 
