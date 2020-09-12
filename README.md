@@ -1,12 +1,13 @@
 # OpenAir
 
-# Before Installing the Core Network
+Before Installing the Core Network
+===================================
 
 Before we install the core network, we need to properly setup our virtualbox. This will consist of fixing the FQDN, setting up the virtual networking, installing the proper kernel for the SPGW, and downloading the latest version of the core network from the github repo.
 
 ## Specify the FQDN
 
-    sudo vim /etc/hosts
+    sudo nano /etc/hosts
 
 Make it look like this:
 
@@ -64,6 +65,13 @@ After this, my ifconfig looks like:
             RX errors 0  dropped 0  overruns 0  frame 0
             TX packets 426942  bytes 35904185 (35.9 MB)
             TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+# Install Low-Latency Kernel 
+
+This is needed for the SPGW. It’s best to get this started soon because it’ll take ~1hr to do. If you have to compile the kernel, you can work on other steps while the kernel compiles.
+
+    sudo apt install linux-lowlatency
+    sudo apt install linux-headers-lowlatency
 
 OpenAirInterface
 =================
