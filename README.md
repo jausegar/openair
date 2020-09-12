@@ -189,11 +189,9 @@ Result: Data transmission with an off the shelf cell phone up to 8Mbps (iperf) w
 
 Guides for installation:
 
-[1](https://gitlab.eurecom.fr/oai/openairinterface5g/wikis/HowToConnectCOTSUEwithOAIeNBNew) (Latest) Main OAI page for setup with usrp device
-
-[2](https://open-cells.com/index.php/2017/05/10/limesdr-installation/) open-cells LimeSDR setup
-
-[3](https://open-cells.com/index.php/2017/08/22/all-in-one-openairinterface-august-22nd/) Recent (8/22/2017) all-in-one box build of OAI eNodeB and EPC components.
+   [1](https://gitlab.eurecom.fr/oai/openairinterface5g/wikis/HowToConnectCOTSUEwithOAIeNBNew) (Latest) Main OAI page for setup with usrp device
+   [2](https://open-cells.com/index.php/2017/05/10/limesdr-installation/) open-cells LimeSDR setup
+   [3](https://open-cells.com/index.php/2017/08/22/all-in-one-openairinterface-august-22nd/) Recent (8/22/2017) all-in-one box build of OAI eNodeB and EPC components.
 
 Commit (https://gitlab.eurecom.fr/oai/openairinterface5g/-/tree/7f28f8d10dc0d73fd4b10d4a89fde554158f9fb5)
 
