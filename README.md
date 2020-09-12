@@ -188,15 +188,20 @@ In order to work with LimeSDR, first it is necessary to install LimeSDR drivers 
 Result: Data transmission with an off the shelf cell phone up to 8Mbps (iperf) with very limited range using two antenna for tx and rx (proper duplexer project pending). That is, the phone must be experimentally positioned a less than a half meter from the LimeSDR and moved around until a good constellation display is found for best results.
 
 Guides for installation:
+
 [1](https://gitlab.eurecom.fr/oai/openairinterface5g/wikis/HowToConnectCOTSUEwithOAIeNBNew) (Latest) Main OAI page for setup with usrp device
+
 [2](https://open-cells.com/index.php/2017/05/10/limesdr-installation/) open-cells LimeSDR setup
+
 [3](https://open-cells.com/index.php/2017/08/22/all-in-one-openairinterface-august-22nd/) Recent (8/22/2017) all-in-one box build of OAI eNodeB and EPC components.
+
 Commit (https://gitlab.eurecom.fr/oai/openairinterface5g/-/tree/7f28f8d10dc0d73fd4b10d4a89fde554158f9fb5)
 
     ~/openairinterface$ git clone https://gitlab.eurecom.fr/oai/openairinterface5g.git     # Near 200MB 
     cd  openairinterface5g
     git branch
     git checkout 7f28f8d10dc0d73fd4b10d4a89fde554158f9fb5
+    git checkout -b 7f28f8d10dc0d73fd4b10d4a89fde554158f9fb5
     ~/openairinterface/openairinterface5g$ source oaienv
     ~/openairinterface/openairinterface5g$ ./build_oai -I --install-optional-packages          <-- left this running in a screen, installs a bunch of pkgs
 
