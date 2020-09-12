@@ -106,9 +106,9 @@ Commit (https://gitlab.eurecom.fr/oai/openairinterface5g/-/tree/7f28f8d10dc0d73f
     git branch
     git checkout 7f28f8d10dc0d73fd4b10d4a89fde554158f9fb5
     ~/openairinterface/openairinterface5g$ source oaienv
-    ~/openairinterface/openairinterface5g$ ./build_oai -I --install-optional-packages          <-- left this running in a screen, installs a bunch of pkgs -- hope it does not break my 2G stuff!
+    ~/openairinterface/openairinterface5g$ ./build_oai -I --install-optional-packages          <-- left this running in a screen, installs a bunch of pkgs
 
-came home to find a question in the screen, about allowing non-root users to run wireshark packet capture - choose the not-recommended 'yes'
+A question appeared in the screen, about allowing non-root users to run wireshark packet capture - choose the not-recommended 'yes'
 then fail on python ssl - had to fix with
 
     python -m easy_install --upgrade pyOpenSSL
@@ -175,7 +175,7 @@ Of course there is no core network in this very special “phy-test” mode and 
 
 Please read the 4G tutorial for more information on how to make initial installation of OpenAir.
 
-Then, you can compile and run 5G tests
+Then, you can compile and run 5G tests.
 
 
 
