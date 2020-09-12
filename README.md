@@ -1,5 +1,70 @@
 # OpenAir
 
+# Before Installing the Core Network
+
+Before we install the core network, we need to properly setup our virtualbox. This will consist of fixing the FQDN, setting up the virtual networking, installing the proper kernel for the SPGW, and downloading the latest version of the core network from the github repo.
+
+## Specify the FQDN
+
+    sudo vim /etc/hosts
+
+Make it look like this:
+
+    127.0.0.1   localhost
+    127.0.1.1   mme.OpenAir5G.Alliance   mme
+    127.0.1.1   hss.OpenAir5G.Alliance   hss
+
+## Setup network
+
+Run ifconfig and look at the output. Mine looks like:
+
+    ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+            inet 192.168.1.102  netmask 255.255.255.0  broadcast 192.168.1.255
+            ether 08:00:27💿3c:98  txqueuelen 1000  (Ethernet)
+            RX packets 782048  bytes 550640279 (550.6 MB)
+            RX errors 0  dropped 0  overruns 0  frame 0
+            TX packets 387804  bytes 37041353 (37.0 MB)
+            TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+    lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+            inet 127.0.0.1  netmask 255.0.0.0
+            loop  txqueuelen 1000  (Local Loopback)
+            RX packets 426942  bytes 35904185 (35.9 MB)
+            RX errors 0  dropped 0  overruns 0  frame 0
+            TX packets 426942  bytes 35904185 (35.9 MB)
+            TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+We need to add a few virtual things. Here’s the commands I use:
+
+    sudo ifconfig ens33:0 172.66.1.113 up  # For the HSS side of S6a
+    sudo ifconfig ens33:11 172.66.1.111 up # For the MME side of S6a
+
+After this, my ifconfig looks like:
+
+    ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+            inet 192.168.1.102  netmask 255.255.255.0  broadcast 192.168.1.255
+            ether 08:00:27💿3c:98  txqueuelen 1000  (Ethernet)
+            RX packets 782048  bytes 550640279 (550.6 MB)
+            RX errors 0  dropped 0  overruns 0  frame 0
+            TX packets 387804  bytes 37041353 (37.0 MB)
+            TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+    ens33:0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+            inet 172.66.1.113  netmask 255.255.0.0  broadcast 172.66.255.255
+            ether 08:00:27💿3c:98  txqueuelen 1000  (Ethernet)
+
+    ens33:11: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+            inet 172.66.1.111  netmask 255.255.0.0  broadcast 172.66.255.255
+            ether 08:00:27💿3c:98  txqueuelen 1000  (Ethernet)
+
+    lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+            inet 127.0.0.1  netmask 255.0.0.0
+            loop  txqueuelen 1000  (Local Loopback)
+            RX packets 426942  bytes 35904185 (35.9 MB)
+            RX errors 0  dropped 0  overruns 0  frame 0
+            TX packets 426942  bytes 35904185 (35.9 MB)
+            TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
 OpenAirInterface
 =================
 
