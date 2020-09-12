@@ -131,6 +131,10 @@ We can install first then go configure everything.
 
 ## Install Cassandra Database for the HSS
 
+Install curl, jdk and jre:
+    
+    sudo apt install curl openjdk-8-jdk openjdk-8-jre
+
 There are issues with the current Cassandra script. First, add the public key:
 
     wget -q -O - https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
