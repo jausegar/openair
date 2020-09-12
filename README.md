@@ -84,29 +84,44 @@ HSS (https://github.com/OPENAIRINTERFACE/openair-hss/commit/d1d0e45ec749fc49f749
 
     git clone https://github.com/OPENAIRINTERFACE/openair-hss.git
     git branch
+    git checkout develop
+    git checkout d1d0e45ec749fc49f749c65744084ee09ab1f3e5
+    git branch
     git checkout -b d1d0e45ec749fc49f749c65744084ee09ab1f3e5
 
 MME (https://github.com/OPENAIRINTERFACE/openair-mme/tree/7b19f50222283e9b4f4a86d3adadc719871abca5)
 
     git clone https://github.com/OPENAIRINTERFACE/openair-mme.git
     git branch
-    git check out -b 7b19f50222283e9b4f4a86d3adadc719871abca5
+    git checkout develop
+    git checkout 7b19f50222283e9b4f4a86d3adadc719871abca5
+    git branch
+    git checkout -b 7b19f50222283e9b4f4a86d3adadc719871abca5
 
 SPGW-U (https://github.com/OPENAIRINTERFACE/openair-spgwu-tiny/commit/c7927169b93456af59818d5682d66980bfee874d)
     
     git clone https://github.com/OPENAIRINTERFACE/openair-spgwu-tiny.git
     git branch
-    git check out -b c7927169b93456af59818d5682d66980bfee874d
+    git checkout develop
+    git checkout  c7927169b93456af59818d5682d66980bfee874d
+    git branch
+    git checkout -b c7927169b93456af59818d5682d66980bfee874d
 
 SPGW-C (https://github.com/OPENAIRINTERFACE/openair-spgwc/tree/9c2e49fe60351b69a7da1a898e4bbc0fd39dcc41)
 
     git clone https://github.com/OPENAIRINTERFACE/openair-spgwc.git
+    git branch
+    git checkout develop
+    git checkout 9c2e49fe60351b69a7da1a898e4bbc0fd39dcc41
     git branch
     git checkout -b 9c2e49fe60351b69a7da1a898e4bbc0fd39dcc41
 
 RAN (https://gitlab.eurecom.fr/oai/openairinterface5g/-/tree/7f28f8d10dc0d73fd4b10d4a89fde554158f9fb5)
 
     git clone https://gitlab.eurecom.fr/oai/openairinterface5g.git
+    git branch
+    git checkout develop
+    git checkout 7f28f8d10dc0d73fd4b10d4a89fde554158f9fb5
     git branch
     git checkout -b 7f28f8d10dc0d73fd4b10d4a89fde554158f9fb5
 
