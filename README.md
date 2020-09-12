@@ -83,6 +83,7 @@ Clone the openair-hss, openair-mme, openair-spgwu-tiny, spgw-c and RAN repos (wi
 HSS (https://github.com/OPENAIRINTERFACE/openair-hss/commit/d1d0e45ec749fc49f749c65744084ee09ab1f3e5)
 
     git clone https://github.com/OPENAIRINTERFACE/openair-hss.git
+    cd  openair-hss
     git branch
     git checkout develop
     git checkout d1d0e45ec749fc49f749c65744084ee09ab1f3e5
@@ -92,6 +93,7 @@ HSS (https://github.com/OPENAIRINTERFACE/openair-hss/commit/d1d0e45ec749fc49f749
 MME (https://github.com/OPENAIRINTERFACE/openair-mme/tree/7b19f50222283e9b4f4a86d3adadc719871abca5)
 
     git clone https://github.com/OPENAIRINTERFACE/openair-mme.git
+    cd  openair-mme
     git branch
     git checkout develop
     git checkout 7b19f50222283e9b4f4a86d3adadc719871abca5
@@ -101,6 +103,7 @@ MME (https://github.com/OPENAIRINTERFACE/openair-mme/tree/7b19f50222283e9b4f4a86
 SPGW-U (https://github.com/OPENAIRINTERFACE/openair-spgwu-tiny/commit/c7927169b93456af59818d5682d66980bfee874d)
     
     git clone https://github.com/OPENAIRINTERFACE/openair-spgwu-tiny.git
+    cd  openair-spgwu-tiny
     git branch
     git checkout develop
     git checkout  c7927169b93456af59818d5682d66980bfee874d
@@ -110,6 +113,7 @@ SPGW-U (https://github.com/OPENAIRINTERFACE/openair-spgwu-tiny/commit/c7927169b9
 SPGW-C (https://github.com/OPENAIRINTERFACE/openair-spgwc/tree/9c2e49fe60351b69a7da1a898e4bbc0fd39dcc41)
 
     git clone https://github.com/OPENAIRINTERFACE/openair-spgwc.git
+    cd  openair-spgwc
     git branch
     git checkout develop
     git checkout 9c2e49fe60351b69a7da1a898e4bbc0fd39dcc41
@@ -119,6 +123,7 @@ SPGW-C (https://github.com/OPENAIRINTERFACE/openair-spgwc/tree/9c2e49fe60351b69a
 RAN (https://gitlab.eurecom.fr/oai/openairinterface5g/-/tree/7f28f8d10dc0d73fd4b10d4a89fde554158f9fb5)
 
     git clone https://gitlab.eurecom.fr/oai/openairinterface5g.git
+    cd  openairinterface5g
     git branch
     git checkout develop
     git checkout 7f28f8d10dc0d73fd4b10d4a89fde554158f9fb5
@@ -190,7 +195,9 @@ Result: Data transmission with an off the shelf cell phone up to 8Mbps (iperf) w
 Guides for installation:
 
    [1](https://gitlab.eurecom.fr/oai/openairinterface5g/wikis/HowToConnectCOTSUEwithOAIeNBNew) (Latest) Main OAI page for setup with usrp device
+   
    [2](https://open-cells.com/index.php/2017/05/10/limesdr-installation/) open-cells LimeSDR setup
+   
    [3](https://open-cells.com/index.php/2017/08/22/all-in-one-openairinterface-august-22nd/) Recent (8/22/2017) all-in-one box build of OAI eNodeB and EPC components.
 
 Commit (https://gitlab.eurecom.fr/oai/openairinterface5g/-/tree/7f28f8d10dc0d73fd4b10d4a89fde554158f9fb5)
