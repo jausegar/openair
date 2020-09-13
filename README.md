@@ -317,22 +317,24 @@ Restart Cassandra:
 
 ## Add in your SIM Info
 
-There are commands (./data_provisioning_users and ./data_provisioning_mme), to help with this. I am using SIM cards provided by opencells. They have a corenetwork sql file for the old hss that goes with their SIM cards. The commands below are for my SIM cards. Modify each as necessary.
+There are commands (./data_provisioning_users and ./data_provisioning_mme), to help with this. I am using SIM cards provided by opencells. They have a corenetwork sql file for the old hss that goes with their SIM cards (fields Ki, IMSI and OPC are mandatory). The commands below are for my SIM cards. Modify each as necessary.
 
     cd
     Cassandra_Server_IP='127.0.0.1'
     cqlsh --file ../src/hss_rel14/db/oai_db.cql $Cassandra_Server_IP
-    ./openair-cn/scripts/data_provisioning_users --apn default --apn2 internet --key 6874736969202073796d4b2079650a73 --imsi-first 208920100001100 --msisdn-first 33638020000 --mme-identity mme.ng4T.com --no-of-users 20 --realm ng4T.com --truncate True --verbose True --cassandra-cluster $Cassandra_Server_IP
+    ./data_provisioning_users --apn default --apn2 internet --key 684D11FF4B64857EDC5A39C390F68E37 --imsi-first 901700000036100 --opc 575EF548D103417B4530535622B2B8FA --msisdn-first 34658765235 --mme-identity mme.ng4T.com --no-of-users 20 --realm ng4T.com --truncate True --verbose True --cassandra-cluster $Cassandra_Server_IP    
+
 
 ## Add MME info to the database
 
-    ./openair-cn/scripts/data_provisioning_mme --id 3 --mme-identity mme.ng4T.com --realm ng4T.com --ue-reachability 1 --truncate True  --verbose True -C $Cassandra_Server_IP
+    ./openair-hss/scripts/data_provisioning_mme --id 3 --mme-identity mme.ng4T.com --realm ng4T.com --ue-reachability 1 --truncate True  --verbose True -C $Cassandra_Server_IP
 
 ## Get Certificates:
+If the directory freeDiameter is not made in /usr/local/etc/oai, make it
 
     cd  # Put yourself in your home dir
-    ./openair-cn/src/hss_rel14/bin/make_certs.sh hss ng4t.com /usr/local/etc/oai                      # For HSS
-    sudo ./openair-cn/scripts/check_mme_s6a_certificate /usr/local/etc/oai/freeDiameter mme.ng4t.com  # For MME
+    ./openair-hss/src/hss_rel14/bin/make_certs.sh hss ng4t.com /usr/local/etc/oai                      # For HSS
+    sudo ./openair-hss/scripts/check_mme_s6a_certificate /usr/local/etc/oai/freeDiameter mme.ng4t.com  # For MME
 
 ## Copy Files
 
