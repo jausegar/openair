@@ -218,10 +218,10 @@ then fail on python ssl - had to fix with
 Re-run ./build_oai above and completed successfully
 Next run
 
-    ~/openairinterface/openairinterface5g$ source oaienv     Since I exited the screen with env set
-    ~/src/oai/openairinterface5g$ ./cmake_targets/build_oai --eNB -w LMSSDR -c -C -x
+    ~/openairinterface5g$ source oaienv     Since I exited the screen with env set
+    ~/openairinterface5g$ ./cmake_targets/build_oai --eNB -w LMSSDR -c -C -x
     < ... >
-    -- Build files have been written to: /home/chuck/src/oai/openairinterface5g/cmake_targets/lte_build_oai/build
+    -- Build files have been written to: /home/openair/oai/openairinterface5g/cmake_targets/lte_build_oai/build
     Compiling lte-softmodem
     Log file for compilation has been written to: /home/chuck/src/oai/openairinterface5g/cmake_targets/log/lte-softmodem.Rel14.txt
     lte-softmodem compiled
@@ -231,7 +231,7 @@ Next run
     10. Bypassing the Tests ..
 
 More on build options:
-A fellow in the discourse how-to-install-limesdr-on-openinterface-enodeb uses: ./build_oai -I --eNB -x -w LMSSDR Add -x to enable xforms (soft scope), -w hardware EXMIMO, USRP, BLADERF, ETHERNET, LMSSDR, None (Default) --eNB Makes the LTE softmodem -I Installs required packages such as LibXML, asn1.1 compiler, freediameter, ... <-- I did this seperately above
+A fellow in the discourse how-to-install-limesdr-on-openinterface-enodeb uses: ./build_oai -I --eNB -x -w LMSSDR Add -x to enable xforms (soft scope), -w hardware EXMIMO, USRP, BLADERF, ETHERNET, LMSSDR, None (Default) --eNB Makes the LTE softmodem -I Installs required packages such as LibXML, asn1.1 compiler, freeDiameter, ... <-- I did this seperately above
 
 Above command had -c clean Erase all files to make a rebuild from start
 -C clean-all Erase all files made by previous compilations, installations
