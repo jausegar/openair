@@ -359,17 +359,17 @@ Nearly everything is done on virtual interfaces. The mme sets up it’s virtual 
 
 The virtual interfaces for the SPGW are not set up automatically. These commands turn them on:
 
-# Set up interfaces for SPGW-U
+## Set up interfaces for SPGW-U
 
-    sudo ifconfig ens3:sxu 172.55.55.102 up   # SPGW-U SXab interface
-    sudo ifconfig ens3:s1u 192.168.248.159 up # SPGW-U S1U interface
+    sudo ifconfig ens33:sxu 172.55.55.102 up   # SPGW-U SXab interface
+    sudo ifconfig ens33:s1u 192.168.248.159 up # SPGW-U S1U interface
 
-# Set up interfaces for SPGW-C
+## Set up interfaces for SPGW-C
 
-    sudo ifconfig ens3:sxc 172.55.55.101 up # SPGW-C SXab interface
-    sudo ifconfig ens3:s5c 172.58.58.102 up # SGW-C S5S8 interface
-    sudo ifconfig ens3:p5c 172.58.58.101 up # PGW-C S5S8 interface
-    sudo ifconfig ens3:s11 172.16.1.104 up  # SGW-C S11 interface
+    sudo ifconfig ens33:sxc 172.55.55.101 up # SPGW-C SXab interface
+    sudo ifconfig ens33:s5c 172.58.58.102 up # SGW-C S5S8 interface
+    sudo ifconfig ens33:p5c 172.58.58.101 up # PGW-C S5S8 interface
+    sudo ifconfig ens33:s11 172.16.1.104 up  # SGW-C S11 interface
 
 Run Everything
 =============
