@@ -139,6 +139,8 @@ We can install first then go configure everything.
 Install curl, jdk and jre:
     
     sudo apt install curl openjdk-8-jdk openjdk-8-jre
+    
+Note: Be careful, because it seems Cassandra doesn't work with java version higher than v8 (Cassandra doesn't support higher versions yet). Do not install jre (or jdk) by default.
 
 There are issues with the current Cassandra script. First, add the public key:
 
