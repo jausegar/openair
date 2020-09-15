@@ -354,10 +354,9 @@ The configurations are found in openair-<block>/etc. Here, I have mine. The mme,
 
 ## Fill in the config files
 
-The official guide sets up everything via declaring variables and then performing sed commands. I prefer to do this manually. I think it is valuable to open each file, see all the paramters, and to fill them in according to your setup.
-Note on the interfaces.
+The official guide sets up everything via declaring variables (which need to be defined) and then performing sed commands. Some people prefer to do this manually. Perhaps, it is valuable to open each file, see all the paramters, and to fill them in according to your setup.
 
-Nearly everything is done on virtual interfaces. The mme sets up it’s virtual interfaces when we run the command to start the MME.
+Note on the interfaces (they need to be defined). Nearly everything is done on virtual interfaces. The mme sets up it’s virtual interfaces when we run the command to start the MME.
 
 The virtual interfaces for the SPGW are not set up automatically. These commands turn them on:
 
