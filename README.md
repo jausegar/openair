@@ -311,6 +311,10 @@ Please read the 4G tutorial for more information on how to make initial installa
 
 Then, you can compile and run 5G tests.
 
+To run the RAN with LimeSDR:
+    cd lte_build_oai/build
+    sudo ./lte-softmodem -O …/…/…/targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.25PRB.lmssdr.conf --rf-config-file …/…/…/targets/ARCH/LMSSDR/LimeSDR_above_1p8GHz_1v4.ini
+
 
 
 Configure Everything
