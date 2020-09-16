@@ -7,6 +7,8 @@ Before we install the core network, we need to properly setup our virtualbox. Th
 
 ## Specify the FQDN
 
+As an example, you can specify in the hosts file the IP and name of some hosts in the default network.
+
     sudo nano /etc/hosts
 
 Make it look like this:
@@ -17,7 +19,7 @@ Make it look like this:
 
 ## Setup network
 
-Run ifconfig and look at the output. Mine looks like:
+Run ifconfig and look at the output. It looks like:
 
     ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
             inet 192.168.1.102  netmask 255.255.255.0  broadcast 192.168.1.255
@@ -35,11 +37,12 @@ Run ifconfig and look at the output. Mine looks like:
             TX packets 426942  bytes 35904185 (35.9 MB)
             TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
-We need to add a few virtual things. Here’s the commands I use:
+In order to access to the different interfaces in the EPC, we need to add a few virtual interfaces. Here you have the commands used (take into account this interfaces IP are not the proper ones):
 
     sudo ifconfig ens33:0 172.66.1.113 up  # For the HSS side of S6a
     sudo ifconfig ens33:11 172.66.1.111 up # For the MME side of S6a
-
+    ...
+    
 After this, my ifconfig looks like:
 
     ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
@@ -65,6 +68,33 @@ After this, my ifconfig looks like:
             RX errors 0  dropped 0  overruns 0  frame 0
             TX packets 426942  bytes 35904185 (35.9 MB)
             TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+The virtual interfaces for the SPGW are not set-up automatically. These commands turn them on:
+
+### Set up interfaces for SPGW-U
+
+    sudo ifconfig ens33:sxu 172.55.55.102 up   # SPGW-U SXab interface
+    sudo ifconfig ens33:s1u 192.168.248.159 up # SPGW-U S1U interface
+
+### Set up interfaces for SPGW-C
+
+    sudo ifconfig ens33:sxc 172.55.55.101 up # SPGW-C SXab interface
+    sudo ifconfig ens33:s5c 172.58.58.102 up # SGW-C S5S8 interface
+    sudo ifconfig ens33:p5c 172.58.58.101 up # PGW-C S5S8 interface
+    sudo ifconfig ens33:s11 172.16.1.104 up  # SGW-C S11 interface
+
+![Image](img/5G_interfaces.png)
+
+### Other interfaces 
+
+    sudo ifconfig ens33 192.168.3.17 up         # SPGW-U SGI interface
+    sudo ifconfig ens33:m1c 192.168.247.102 up  # MME S1 interface
+    sudo ifconfig ens33:m11 172.16.1.102 up     # MME S11 interface
+    sudo ifconfig ens33:m10 192.168.10.110 up   # MME S10 interface
+ 
+For HSS, S6A corresponds to the family connected to Cassandra 127.0.0.10 (Cassandra server is 127.0.0.1)
+
 
 # Install Low-Latency Kernel 
 
@@ -356,32 +386,9 @@ The configurations are found in openair-<block>/etc. Here, I have mine. The mme,
 
 The official guide sets up everything via declaring variables (which need to be defined) and then performing sed commands. Some people prefer to do this manually. Perhaps, it is valuable to open each file, see all the paramters, and to fill them in according to your setup.
 
-Note on the interfaces (they need to be defined). Nearly everything is done on virtual interfaces. The mme sets up it’s virtual interfaces when we run the command to start the MME.
+Note on the interfaces (many of they need to be defined). Nearly everything is done on virtual interfaces (look at the section about the network setup). The mme sets up it’s virtual interfaces when we run the command to start the MME.
 
-The virtual interfaces for the SPGW are not set up automatically. These commands turn them on:
 
-### Set up interfaces for SPGW-U
-
-    sudo ifconfig ens33:sxu 172.55.55.102 up   # SPGW-U SXab interface
-    sudo ifconfig ens33:s1u 192.168.248.159 up # SPGW-U S1U interface
-
-### Set up interfaces for SPGW-C
-
-    sudo ifconfig ens33:sxc 172.55.55.101 up # SPGW-C SXab interface
-    sudo ifconfig ens33:s5c 172.58.58.102 up # SGW-C S5S8 interface
-    sudo ifconfig ens33:p5c 172.58.58.101 up # PGW-C S5S8 interface
-    sudo ifconfig ens33:s11 172.16.1.104 up  # SGW-C S11 interface
-
-![Image](img/5G_interfaces.png)
-
-### Other interfaces 
-
-    sudo ifconfig ens33 192.168.3.17 up         # SPGW-U SGI interface
-    sudo ifconfig ens33:m1c 192.168.247.102 up  # MME S1 interface
-    sudo ifconfig ens33:m11 172.16.1.102 up     # MME S11 interface
-    sudo ifconfig ens33:m10 192.168.10.110 up   # MME S10 interface
- 
-For HSS, S6A corresponds to the family connected to Cassandra 127.0.1.1 (Cassandra server is 127.0.0.1)
 
 Run Everything
 =============
