@@ -372,6 +372,17 @@ The virtual interfaces for the SPGW are not set up automatically. These commands
     sudo ifconfig ens33:p5c 172.58.58.101 up # PGW-C S5S8 interface
     sudo ifconfig ens33:s11 172.16.1.104 up  # SGW-C S11 interface
 
+![Image](img/5G_interfaces.png)
+
+### Other interfaces 
+
+    sudo ifconfig ens33 192.168.3.17 up         # SPGW-U SGI interface
+    sudo ifconfig ens33:m1c 192.168.247.102 up  # MME S1 interface
+    sudo ifconfig ens33:m11 172.16.1.102 up     # MME S11 interface
+    sudo ifconfig ens33:m10 192.168.10.110 up   # MME S10 interface
+ 
+For HSS, S6A corresponds to the family connected to Cassandra 127.0.1.1 (Cassandra server is 127.0.0.1)
+
 Run Everything
 =============
 
@@ -404,6 +415,7 @@ The SPGW_C will start, then you can exit the screen by hitting CTRL + A + D.
     sudo spgwu -c /usr/local/etc/oai/spgw_u.conf
 
 The SPGW_U will start, then you can exit the screen by hitting CTRL + A + D.
+
 
 
 # Monitoring
