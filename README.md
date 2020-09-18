@@ -14,8 +14,8 @@ As an example, you can specify in the hosts file the IP and name of some hosts i
 Make it look like this:
 
     127.0.0.1   localhost
-    127.0.1.1   mme.OpenAir5G.Alliance   mme
-    127.0.1.1   hss.OpenAir5G.Alliance   hss
+    127.0.2.1   mme.ng4T.com   mme
+    127.0.3.1   hss.ng4T.com   hss
 
 ## Setup network
 
@@ -93,7 +93,7 @@ The virtual interfaces for the SPGW are not set-up automatically. These commands
     sudo ifconfig ens33:m11 172.16.1.102 up     # MME S11 interface
     sudo ifconfig ens33:m10 192.168.10.110 up   # MME S10 interface
  
-For HSS, S6A corresponds to the family connected to Cassandra 127.0.0.10 (Cassandra server is 127.0.0.1)
+For HSS, S6A corresponds to the family connected to Cassandra 127.0.2.1 (Cassandra server is 127.0.0.1) and for MME is 127.0.3.1
 
 
 # Install Low-Latency Kernel 
