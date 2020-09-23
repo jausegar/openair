@@ -263,14 +263,14 @@ Next run
     10. Bypassing the Tests ..
 
 More on build options:
-A fellow in the discourse how-to-install-limesdr-on-openinterface-enodeb uses: ./build_oai -I --eNB -x -w LMSSDR Add -x to enable xforms (soft scope), -w hardware EXMIMO, USRP, BLADERF, ETHERNET, LMSSDR, None (Default) --eNB Makes the LTE softmodem -I Installs required packages such as LibXML, asn1.1 compiler, freeDiameter, ... <-- I did this seperately above
+In the discourse myriadrf how-to-install-limesdr-on-openinterface-enodeb, they use: ./build_oai -I --eNB -x -w LMSSDR Add -x to enable xforms (soft scope), -w hardware EXMIMO, USRP, BLADERF, ETHERNET, LMSSDR, None (Default) --eNB Makes the LTE softmodem -I Installs required packages such as LibXML, asn1.1 compiler, freeDiameter, ... 
 
 Above command had -c clean Erase all files to make a rebuild from start
 -C clean-all Erase all files made by previous compilations, installations
 
 The open-cells limesdr-installation used
 
-    ./cmake_targets/build_oai -c -w LMSSDR --eNB --UE --nrUE --gNB
+    ./cmake_targets/build_oai -x -c -w LMSSDR --eNB --UE --nrUE --gNB
 
 for -c clean, -w hardware, --eNB and also --UE Makes the UE specific parts (ue_ip, usim, nvram) from the given configuration file -- default given config file is /home/openair/openairinterface/openairinterface5g/openair3/NAS/TOOLS/ue_eurecom_test_sfr.conf
 
@@ -298,6 +298,17 @@ and any custom LimeSDR tweaks like setting external clock reference or printing 
 
 plus it's just fun to read in itself with /usr/local/include/lime/LimeSuite.h open in another term. Of course rebuild lte-softmodem after any tweaks or experiments.
 
+In order to make LimeSDR Mini operative with OpenAirInterface5G, we need to copy ini files from [myriadrf github](https://github.com/myriadrf/trx-lms7002m) to ~/openairinterface5G/targets/ARCH/LMSSDR/, and do the following from the openairinterface folder:
+
+    cp /targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.50PRB.usrpb210.conf /targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.25PRB.lmssdr.conf
+    nano /targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.25PRB.lmssdr.conf
+    Change:
+        N_RB_DL = 25
+        tx_gain = 20
+        rx_gain = 125
+        pucch_nRB_CQI = 1
+        pucch_referenceSignalPower = -30
+        rach_preambleInitialReceivedTargetPower = -104
 
 In order to run 5G OpenAir, from current develop branch.
 
@@ -309,12 +320,11 @@ Of course there is no core network in this very special “phy-test” mode and 
 
 Please read the 4G tutorial for more information on how to make initial installation of OpenAir.
 
-Then, you can compile and run 5G tests.
+Then, you can compile and run 5G tests (please keep in mind that LimeSDR Mini will provide a low bandwidth for your transmission, so for higher transmission you will need LimeSDR-USB, USRP B210 or USRP X310).
 
 To run the RAN with LimeSDR:
-    cd lte_build_oai/build
-    sudo ./lte-softmodem -O …/…/…/targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.25PRB.lmssdr.conf --rf-config-file …/…/…/targets/ARCH/LMSSDR/LimeSDR_above_1p8GHz_1v4.ini
-
+    cd &cmake_targets/ran_build/build
+    sudo -E ./lte-softmodem -O ../../../targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.25PRB.lmssdr.conf --rf-config-file ../../../targets/ARCH/LMSSDR/LimeSDR_Mini_above_1p8GHz.ini --noS1
 
 
 Configure Everything
