@@ -230,7 +230,7 @@ Guides for installation:
    
    [2](https://open-cells.com/index.php/2017/05/10/limesdr-installation/) open-cells LimeSDR setup
    
-   [3](https://open-cells.com/index.php/2017/08/22/all-in-one-openairinterface-august-22nd/) Recent (8/22/2017) all-in-one box build of OAI eNodeB and EPC components.
+   [3](https://open-cells.com/index.php/2017/08/22/all-in-one-openairinterface-august-22nd/) This is an all-in-one box build of OAI eNodeB and EPC components (from 22/8/2017).
 
 Commit (https://gitlab.eurecom.fr/oai/openairinterface5g/-/tree/7f28f8d10dc0d73fd4b10d4a89fde554158f9fb5)
 
@@ -263,8 +263,11 @@ Next run
     10. Bypassing the Tests ..
 
 More on build options:
-In the discourse myriadrf how-to-install-limesdr-on-openinterface-enodeb, they use: ./build_oai -I --eNB -x -w LMSSDR Add -x to enable xforms (soft scope), -w hardware EXMIMO, USRP, BLADERF, ETHERNET, LMSSDR, None (Default) --eNB Makes the LTE softmodem -I Installs required packages such as LibXML, asn1.1 compiler, freeDiameter, ... 
+In the discourse myriadrf how-to-install-limesdr-on-openinterface-enodeb, they use: 
 
+    ./build_oai -I --eNB -x -w LMSSDR 
+        
+Add -x to enable xforms (soft scope), -w hardware EXMIMO, USRP, BLADERF, ETHERNET, LMSSDR, None (Default) --eNB Makes the LTE softmodem -I Installs required packages such as LibXML, asn1.1 compiler, freeDiameter, ... 
 Above command had -c clean Erase all files to make a rebuild from start
 -C clean-all Erase all files made by previous compilations, installations
 
@@ -294,14 +297,14 @@ What you end up with after that build is:
 
 and any custom LimeSDR tweaks like setting external clock reference or printing confirmation of antenna use go in
 
-    targets/ARCH/LMSSDR/USERSPACE/LIB/lms_lib.cpp
+    openairinterface5g/targets/ARCH/LMSSDR/USERSPACE/LIB/lms_lib.cpp
 
 plus it's just fun to read in itself with /usr/local/include/lime/LimeSuite.h open in another term. Of course rebuild lte-softmodem after any tweaks or experiments.
 
-In order to make LimeSDR Mini operative with OpenAirInterface5G, we need to copy ini files from [myriadrf github](https://github.com/myriadrf/trx-lms7002m) to ~/openairinterface5G/targets/ARCH/LMSSDR/, and do the following from the openairinterface folder:
+In order to make LimeSDR Mini operative with OpenAirInterface5G, we need to copy ini files from [myriadrf github](https://github.com/myriadrf/trx-lms7002m) to ~/openairinterface5g/targets/ARCH/LMSSDR/, and do the following from the openairinterface folder:
 
     cp /targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.50PRB.usrpb210.conf /targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.25PRB.lmssdr.conf
-    nano /targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.25PRB.lmssdr.conf
+    nano openairinterface5g/targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.25PRB.lmssdr.conf
     Change:
         N_RB_DL = 25
         tx_gain = 20
@@ -322,10 +325,18 @@ Please read the 4G tutorial for more information on how to make initial installa
 
 Then, you can compile and run 5G tests (please keep in mind that LimeSDR Mini will provide a low bandwidth for your transmission, so for higher transmission you will need LimeSDR-USB, USRP B210 or USRP X310).
 
-To run the RAN with LimeSDR:
-    cd &cmake_targets/ran_build/build
-    sudo -E ./lte-softmodem -O ../../../targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.25PRB.lmssdr.conf --rf-config-file ../../../targets/ARCH/LMSSDR/LimeSDR_Mini_above_1p8GHz.ini --noS1
+## Running the RAN
 
+To run the RAN with LimeSDR:
+
+        cd openairinterface5g/cmake_targets/ran_build/build
+        sudo -E ./lte-softmodem -O ../../../targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.25PRB.lmssdr.conf --rf-config-file ../../../targets/ARCH/LMSSDR/LimeSDR_Mini_above_1p8GHz.ini --noS1 # With --noS1 the negotiation with the telephone is not done
+
+For the USRP B210 the command is:
+
+        cd openairinterface5g/cmake_targets/ran_build/build
+        sudo -E ./lte-softmodem -O ../../../ci-scripts/conf_files/enb.band7.tm1.25PRB.usrpb210.conf -d
+        
 
 Configure Everything
 ======================
