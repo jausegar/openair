@@ -411,7 +411,7 @@ We’ll need four separate terminals. Start with the hss. It is better to do thi
 
     screen -S hss # Create a named screen session for the HSS.
     cd ~/openair-hss/scripts
-    ./run_hss -j /usr/local/etc/oai/hss_rel14.json  # This is run inside the screen session
+    ./oai_hss -j /usr/local/etc/oai/hss_rel14.json  # This is run inside the screen session 
 
 The HSS will start, then you can exit the screen by hitting CTRL + A + D.
 
@@ -419,7 +419,7 @@ Then the mme:
 
     screen -S mme # Create a named screen session for the MME.
     cd ~/openair-mme/scripts
-    ./run_mme --set-virt-if
+    ./run_mme -c /usr/local/etc/oai/mme.conf --set-virt-if # The virtual interface option does not work properly
 
 The MME will start, then you can exit the screen by hitting CTRL + A + D.
 
@@ -427,13 +427,13 @@ And now the spgw:
 
     screen -S spgw_c # Create a named screen session for the SPGW.
     cd ~/openair-spgwc/build/scripts
-    sudo spgwc -c /usr/local/etc/oai/spgw_c.conf
+    sudo spgwc -c /usr/local/etc/oai/spgw_c.conf # Option -o helps with further information (as verbose)
 
 The SPGW_C will start, then you can exit the screen by hitting CTRL + A + D.
 
     screen -S spgw_u # Create a named screen session for the SPGW.
     cd ~/openair-spgwu-tiny/build/scripts
-    sudo spgwu -c /usr/local/etc/oai/spgw_u.conf
+    sudo spgwu -c /usr/local/etc/oai/spgw_u.conf # Option -o helps with further information (as verbose)
 
 The SPGW_U will start, then you can exit the screen by hitting CTRL + A + D.
 
