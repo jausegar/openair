@@ -1,0 +1,23 @@
+# Interfaces
+sudo ifconfig ens34:s11 192.168.2.4 up # SGW-C S11 interface
+sudo ifconfig ens34:s5c 192.168.5.4 up # SGW-C S5S8 interface
+sudo ifconfig ens34:p5c 192.168.5.5 up # PGW-C S5S8 interface
+sudo ifconfig ens34:sxc 192.168.4.4 up # SPGW-C SXab interface 
+
+sudo ifconfig ens35 192.168.1.2 up # SPGW-U S1U interface vmnet3 -> ens39
+sudo ifconfig ens34:sxu 192.168.4.3 up # SPGW-U SXab interface
+
+sudo ifconfig ens34 192.168.0.2 up  # MME S1 interface vmnet2 -> ens38
+sudo ifconfig ens34:m11 192.168.2.2 up    # MME S11 interface 
+sudo ifconfig ens34:m10 192.168.3.2 up    # MME S10 interface
+
+#sudo ifconfig ens33:e1c 192.168.0.104 up  # eNB S1 interface
+#sudo ifconfig ens33:e1u 192.168.1.130 up  # eNB S1U interface
+
+
+
+./data_provisioning_users --apn apn1.mnc070.mcc901 --apn2 apn2.mnc070.mcc901 --key DB005B05E6A7C0C347C825605A9A09BA --imsi-first 901700000036108 --opc 17B964A298EB221F096390E27E22D634 --msisdn-first 34658765235 --mme-identity mme.oai5G.org --no-of-users 1 --realm oai5G.org --truncate True --verbose True --cassandra-cluster 127.0.0.1 
+
+
+apn1mnc070mcc901
+
