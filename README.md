@@ -240,7 +240,7 @@ Commit (https://gitlab.eurecom.fr/oai/openairinterface5g/-/tree/7f28f8d10dc0d73f
     git checkout 7f28f8d10dc0d73fd4b10d4a89fde554158f9fb5
     git checkout -b 7f28f8d10dc0d73fd4b10d4a89fde554158f9fb5
     ~/openairinterface/openairinterface5g$ source oaienv
-    ~/openairinterface/openairinterface5g$ ./build_oai -I --install-optional-packages          <-- left this running in a screen, installs a bunch of pkgs
+    ~/openairinterface/openairinterface5g$ ./build_oai -I --install-optional-packages  -w LMSSDR        <-- left this running in a screen, installs a bunch of pkgs
 
 A question appeared in the screen, about allowing non-root users to run wireshark packet capture - choose the not-recommended 'yes'
 then fail on python ssl - had to fix with
