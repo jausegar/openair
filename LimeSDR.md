@@ -111,3 +111,11 @@ Make sure your LimeSDR has the latest firmware:
         Existing gateware is same as update (1.30)
 
         Programming update complete!
+        
+Note: It is better to have just one device.
+
+# Calibration
+
+In order to calibrate the VCO in the LimeSDR, we will use LimeSuiteGUI. We will connect the device selecting Options/ConnectionSettings. After this, we will do a full calibration in the calibration tag, by pressing 'Calibrate all'. Finally, we have to disconnect the device.
+
+
