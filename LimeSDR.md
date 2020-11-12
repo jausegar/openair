@@ -1,10 +1,10 @@
 # LimeSDR
 
-This tutorial is for LimeSDR Mini. If you use LimeSDR USB, click [here] (https://github.com/myriadrf/LimeSDR-USB). In this [link] (https://github.com/myriadrf/trx-lms7002m) you can find the ini files for LimeSDR USB and LimeSDR Mini.
+This tutorial is for LimeSDR Mini. If you use LimeSDR USB, click [here](https://github.com/myriadrf/LimeSDR-USB). In this [link](https://github.com/myriadrf/trx-lms7002m) you can find the ini files for LimeSDR USB and LimeSDR Mini.
 
 # Kernel/Machine Setup
 
-Follow the instruction provided [here] (https://gitlab.eurecom.fr/oai/openairinterface5g/wikis/OpenAirKernelMainSetup) to setup you machine, in particular the power / cpu freq management. This will resolve, in most of the cases, the realtime issues when running OAI and the RF driver.
+Follow the instruction provided [here](https://gitlab.eurecom.fr/oai/openairinterface5g/wikis/OpenAirKernelMainSetup) to setup you machine, in particular the power / cpu freq management. This will resolve, in most of the cases, the realtime issues when running OAI and the RF driver.
 
 Install the required Ubuntu packages for LimeSDR Mini.
 Note: the following steps will be shortly integrated with build_oai script
