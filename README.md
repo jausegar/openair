@@ -330,7 +330,7 @@ Then, you can compile and run 5G tests (please keep in mind that LimeSDR Mini wi
 To run the RAN with LimeSDR:
 
         cd openairinterface5g/cmake_targets/ran_build/build
-        sudo -E ./lte-softmodem -O ../../../targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.25PRB.lmssdr.conf --rf-config-file ../../../targets/ARCH/LMSSDR/LimeSDR_Mini_above_1p8GHz.ini --noS1 # With --noS1 the negotiation with the telephone is not done
+        sudo -E ./lte-softmodem -d -O ../../../targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.25PRB.lmssdr.conf --rf-config-file ../../../targets/ARCH/LMSSDR/LimeSDR_Mini_above_1p8GHz.ini --noS1 # With --noS1 the negotiation with the telephone is not done
 
 For the USRP B210 the command is:
 
