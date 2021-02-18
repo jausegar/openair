@@ -438,13 +438,13 @@ And now the spgw:
 
     screen -S spgw_c # Create a named screen session for the SPGW.
     cd ~/openair-spgwc/build/scripts
-    sudo spgwc -c /usr/local/etc/oai/spgw_c.conf # Option -o helps with further information (as verbose)
+    sudo spgwc -c /usr/local/etc/oai/spgw_c.conf -0 # Option -o helps with further information (as verbose)
 
 The SPGW_C will start, then you can exit the screen by hitting CTRL + A + D.
 
     screen -S spgw_u # Create a named screen session for the SPGW.
     cd ~/openair-spgwu-tiny/build/scripts
-    sudo spgwu -c /usr/local/etc/oai/spgw_u.conf # Option -o helps with further information (as verbose)
+    sudo spgwu -c /usr/local/etc/oai/spgw_u.conf -o # Option -o helps with further information (as verbose)
 
 The SPGW_U will start, then you can exit the screen by hitting CTRL + A + D.
 
